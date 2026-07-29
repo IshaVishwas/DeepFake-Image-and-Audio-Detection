@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DeepTrust AI | Deepfake Detection</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        html{
+            scroll-behavior:smooth;
+        }
+
+        body{
+            font-family:'Inter',sans-serif;
+            background:#050816;
+            color:white;
+            overflow-x:hidden;
+        }
+
+        .gradient-text{
+            background:linear-gradient(90deg,#60a5fa,#a855f7);
+            -webkit-background-clip:text;
+            -webkit-text-fill-color:transparent;
+        }
+
+        .hero-bg{
+            background:
+            radial-gradient(circle at top right, rgba(59,130,246,.15), transparent 30%),
+            radial-gradient(circle at left, rgba(168,85,247,.15), transparent 30%),
+            #050816;
+        }
+
+        /* FLIP CARDS */
+        .flip-card{
+            perspective:1000px;
+            height:340px;
+            width:100%;
+        }
+
+        .flip-card-inner{
+            position:relative;
+            width:100%;
+            height:100%;
+            transition:transform .8s;
+            transform-style:preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner{
+            transform:rotateY(180deg);
+        }
+
+        .flip-card-front,
+        .flip-card-back{
+            position:absolute;
+            width:100%;
+            height:100%;
+            border-radius:28px;
+            backface-visibility:hidden;
+            -webkit-backface-visibility:hidden;
+            overflow:hidden;
+        }
+
+        .flip-card-front{
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .flip-card-back{
+            transform:rotateY(180deg);
+            display:flex;
+            flex-direction:column;
+            justify-content:flex-start;
+        }
+
+        .glass{
+            background:rgba(255,255,255,.05);
+            border:1px solid rgba(255,255,255,.08);
+            backdrop-filter:blur(18px);
+        }
+
+        .glow-blue{
+            box-shadow:0 0 40px rgba(59,130,246,.25);
+        }
+
+        .glow-pink{
+            box-shadow:0 0 40px rgba(236,72,153,.25);
+        }
+
+        .animate-float{
+            animation:float 4s ease-in-out infinite;
+        }
+
+        @keyframes float{
+            0%{transform:translateY(0px);}
+            50%{transform:translateY(-10px);}
+            100%{transform:translateY(0px);}
+        }
+
+        .btn-hover:hover{
+            transform:translateY(-2px);
+        }
+
+        .btn-hover{
+            transition:.3s;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 w-full z-50 border-b border-white/10 bg-[#050816]/70 backdrop-blur-xl">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-blue-600 flex items-center justify-center font-black text-xl">
+                    T
+                </div>
+
+                <div>
+                    <h1 class="font-extrabold text-xl tracking-tight">
+                        DeepTrust AI
+                    </h1>
+                </div>
+            </div>
+
+            <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-300">
+                <a href="#features" class="hover:text-white transition">
+                    Technology
+                </a>
+
+                <a href="#portal" class="hover:text-white transition">
+                    Portal
+                </a>
+
+                <a href="#" class="hover:text-white transition">
+                    Pricing
+                </a>
+
+                <button class="bg-blue-600 hover:bg-blue-700 px-5 py-2 rounded-full transition">
+                    Sign In
+                </button>
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero-bg min-h-screen pt-36 pb-20">
+
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
+
+            <!-- LEFT -->
+            <div>
+
+                <div class="inline-flex items-center gap-3 border border-blue-500/20 bg-blue-500/10 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest mb-8">
+                    <span class="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></span>
+                    Neural Detection Engine Active
+                </div>
+
+                <h1 class="text-5xl md:text-7xl font-black leading-tight mb-8">
+                    Detect AI <br>
+                    <span class="gradient-text">
+                        Deepfakes Instantly
+                    </span>
+                </h1>
+
+                <p class="text-slate-400 text-lg leading-relaxed max-w-xl mb-10">
+                    Advanced forensic AI system designed for detecting manipulated images,
+                    cloned voices, and synthetic media using neural networks and
+                    deep learning architectures.
+                </p>
+
+                <div class="flex flex-wrap gap-5">
+
+                    <a href="#portal"
+                       class="btn-hover bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded-2xl font-bold">
+                        Analyze Media
+                    </a>
+
+                    <button class="btn-hover border border-white/10 bg-white/5 hover:bg-white/10 px-8 py-4 rounded-2xl font-bold">
+                        View Documentation
+                    </button>
+
+                </div>
+
+            </div>
+
+            <!-- RIGHT -->
+            <div id="portal"
+                 class="glass rounded-[32px] p-8 border border-white/10 shadow-2xl">
+
+                <h2 class="text-center uppercase tracking-[4px] text-[11px] text-slate-400 font-bold mb-8">
+                    DeepTrust Detection Portal
+                </h2>
+
+                <!-- TOGGLE -->
+                <div class="flex justify-center mb-8">
+
+                    <div class="bg-white/5 p-1 rounded-2xl flex w-full max-w-[250px] border border-white/10">
+
+                        <button id="toggleAudio"
+                                class="flex-1 py-3 rounded-xl text-xs font-bold text-slate-400 transition">
+                            Audio
+                        </button>
+
+                        <button id="toggleImage"
+                                class="flex-1 py-3 rounded-xl text-xs font-bold bg-white text-blue-600 transition">
+                            Image
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- DROPZONE -->
+                <div id="dropzone"
+                     class="border-2 border-dashed border-white/10 rounded-3xl py-16 px-6 text-center cursor-pointer transition hover:border-blue-500 hover:bg-blue-500/5">
+
+                    <input type="file"
+                           id="fileInput"
+                           class="hidden"
+                           accept="image/*">
+
+                    <div id="icon"
+                         class="text-6xl mb-5 animate-float">
+                        🖼️
+                    </div>
+
+                    <h3 id="prompt"
+                        class="text-lg font-bold mb-2">
+                        Upload Image to Analyze
+                    </h3>
+
+                    <p class="text-slate-500 text-sm">
+                        PNG, JPG, JPEG or WAV up to 32MB
+                    </p>
+
+                </div>
+
+                <!-- BUTTON -->
+                <button id="runBtn"
+                        class="w-full mt-7 bg-white text-black py-4 rounded-2xl font-black hover:scale-[1.01] transition">
+                    Run Forensic Scan
+                </button>
+
+                <!-- RESULT -->
+                <div id="result"
+                     class="hidden mt-7 bg-white/5 border border-white/10 rounded-3xl p-6">
+
+                    <div class="flex items-center justify-between">
+
+                        <div>
+                            <p class="uppercase tracking-[3px] text-[10px] text-slate-500 font-bold mb-2">
+                                Analysis
+                            </p>
+
+                            <h3 id="resStatus"
+                                class="text-3xl font-black">
+                                ---
+                            </h3>
+                        </div>
+
+                        <div class="text-right">
+
+                            <p class="uppercase tracking-[3px] text-[10px] text-slate-500 font-bold mb-2">
+                                Confidence
+                            </p>
+
+                            <h3 id="resConf"
+                                class="text-2xl font-black">
+                                0%
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features"
+             class="py-28 relative overflow-hidden">
+
+        <div class="max-w-7xl mx-auto px-6">
+
+            <!-- TITLE -->
+            <div class="text-center mb-20">
+
+                <div class="inline-flex items-center gap-2 border border-blue-500/20 bg-blue-500/10 px-5 py-2 rounded-full text-[11px] uppercase tracking-[3px] font-bold mb-6">
+                    🛡️ Neural Verification Modules
+                </div>
+
+                <h2 class="text-5xl font-black mb-6">
+                    Synthetic Media Detection
+                </h2>
+
+                <p class="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed">
+                    Hover over the modules below to reveal the internal
+                    detection architecture and forensic engine details.
+                </p>
+
+            </div>
+
+            <!-- STATS -->
+            <div class="glass rounded-[32px] p-10 grid md:grid-cols-4 gap-10 mb-24">
+
+                <div class="text-center">
+                    <h3 class="text-5xl font-black mb-2">97%</h3>
+                    <p class="uppercase text-[10px] tracking-[4px] text-slate-500 font-bold">
+                        Accuracy
+                    </p>
+                </div>
+
+                <div class="text-center">
+                    <h3 class="text-5xl font-black mb-2">1s</h3>
+                    <p class="uppercase text-[10px] tracking-[4px] text-slate-500 font-bold">
+                        Scan Time
+                    </p>
+                </div>
+
+                <div class="text-center">
+                    <h3 class="text-5xl font-black mb-2">24/7</h3>
+                    <p class="uppercase text-[10px] tracking-[4px] text-slate-500 font-bold">
+                        Monitoring
+                    </p>
+                </div>
+
+                <div class="text-center">
+                    <h3 class="text-5xl font-black mb-2">AI</h3>
+                    <p class="uppercase text-[10px] tracking-[4px] text-slate-500 font-bold">
+                        Neural Engine
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- CARDS -->
+            <div class="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+
+                <!-- IMAGE CARD -->
+                <div class="flip-card">
+
+                    <div class="flip-card-inner">
+
+                        <!-- FRONT -->
+                        <div class="flip-card-front glass glow-blue">
+
+                            <div class="w-20 h-20 bg-blue-600 rounded-3xl flex items-center justify-center text-4xl mb-8 shadow-2xl shadow-blue-600/30">
+                                🖼️
+                            </div>
+
+                            <h3 class="text-4xl font-black mb-4">
+                                Image Verification
+                            </h3>
+
+                            <span class="bg-blue-500/20 text-blue-300 px-4 py-2 rounded-full text-[11px] uppercase tracking-[3px] font-bold">
+                                Module A
+                            </span>
+
+                        </div>
+
+                        <!-- BACK -->
+                        <div class="flip-card-back bg-blue-600 p-8">
+
+                            <h3 class="text-3xl font-black mb-6 italic">
+                                Image Analysis Engine
+                            </h3>
+
+                            <ul class="space-y-4 text-blue-50 text-sm leading-relaxed list-disc pl-5">
+
+                                <li>
+                                    Detects manipulated and AI-generated imagery
+                                </li>
+
+                                <li>
+                                    Analyzes texture inconsistencies and GAN artifacts
+                                </li>
+
+                                <li>
+                                    Identifies compression anomalies and pixel irregularities
+                                </li>
+
+                                <li>
+                                    Uses CNN feature extraction for forensic classification
+                                </li>
+
+                            </ul>
+
+                            <div class="mt-auto pt-6 border-t border-white/20 text-[11px] uppercase tracking-[3px] font-bold text-blue-100">
+                                Engine: ResNet18 CNN
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- AUDIO CARD -->
+                <div class="flip-card">
+
+                    <div class="flip-card-inner">
+
+                        <!-- FRONT -->
+                        <div class="flip-card-front glass glow-pink">
+
+                            <div class="w-20 h-20 bg-pink-600 rounded-3xl flex items-center justify-center text-4xl mb-8 shadow-2xl shadow-pink-600/30">
+                                🎵
+                            </div>
+
+                            <h3 class="text-4xl font-black mb-4 text-center px-4">
+                                Audio Deepfake Detection
+                            </h3>
+
+                            <span class="bg-pink-500/20 text-pink-300 px-4 py-2 rounded-full text-[11px] uppercase tracking-[3px] font-bold">
+                                Module C
+                            </span>
+
+                        </div>
+
+                        <!-- BACK -->
+                        <div class="flip-card-back bg-pink-600 p-8">
+
+                            <h3 class="text-3xl font-black mb-6 italic">
+                                Mel-Spectrogram Analysis
+                            </h3>
+
+                            <ul class="space-y-4 text-pink-50 text-sm leading-relaxed list-disc pl-5">
+
+                                <li>
+                                    Converts audio into Mel-Spectrogram representations
+                                </li>
+
+                                <li>
+                                    Detects voice cloning and synthetic speech artifacts
+                                </li>
+
+                                <li>
+                                    Analyzes pitch, energy, and temporal frequencies
+                                </li>
+
+                                <li>
+                                    Uses CNN + BiLSTM attention architecture
+                                </li>
+
+                            </ul>
+
+                            <div class="mt-auto pt-6 border-t border-white/20 text-[11px] uppercase tracking-[3px] font-bold text-pink-100">
+                                CNN + BiLSTM Attention Engine
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/10 py-16">
+
+        <div class="max-w-7xl mx-auto px-6">
+
+            <div class="grid md:grid-cols-4 gap-12 mb-16">
+
+                <div>
+                    <h3 class="font-black text-lg mb-5">
+                        DeepTrust AI
+                    </h3>
+
+                    <p class="text-slate-500 text-sm leading-relaxed">
+                        Advanced AI-powered forensic verification platform
+                        for synthetic media detection.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="uppercase tracking-[3px] text-[10px] font-bold text-slate-500 mb-5">
+                        Technology
+                    </h4>
+
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li>Image Detection</li>
+                        <li>Voice Analysis</li>
+                        <li>AI Verification</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="uppercase tracking-[3px] text-[10px] font-bold text-slate-500 mb-5">
+                        Enterprise
+                    </h4>
+
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li>Fraud Detection</li>
+                        <li>KYC Security</li>
+                        <li>Forensics</li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="uppercase tracking-[3px] text-[10px] font-bold text-slate-500 mb-5">
+                        Legal
+                    </h4>
+
+                    <ul class="space-y-3 text-sm text-slate-400">
+                        <li>Privacy</li>
+                        <li>Terms</li>
+                        <li>Compliance</li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-5">
+
+                <p class="text-slate-600 text-sm">
+                    © 2026 TruthScan AI. All rights reserved.
+                </p>
+
+                <div class="flex gap-4">
+
+                    <div class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[10px] font-black">
+                        ISO
+                    </div>
+
+                    <div class="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-[10px] font-black">
+                        SOC2
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+    <!-- SCRIPT -->
+    <script>
+
+        const fileInput = document.getElementById('fileInput');
+        const dropzone = document.getElementById('dropzone');
+        const prompt = document.getElementById('prompt');
+        const icon = document.getElementById('icon');
+
+        const toggleAudio = document.getElementById('toggleAudio');
+        const toggleImage = document.getElementById('toggleImage');
+
+        const runBtn = document.getElementById('runBtn');
+
+        const result = document.getElementById('result');
+
+        let currentMode = 'image';
+
+        function setMode(mode){
+
+            currentMode = mode;
+
+            result.classList.add('hidden');
+
+            if(mode === 'image'){
+
+                toggleImage.className =
+                    "flex-1 py-3 rounded-xl text-xs font-bold bg-white text-blue-600 transition";
+
+                toggleAudio.className =
+                    "flex-1 py-3 rounded-xl text-xs font-bold text-slate-400 transition";
+
+                icon.innerText = "🖼️";
+
+                prompt.innerText = "Upload Image to Analyze";
+
+                fileInput.accept = "image/*";
+
+            }
+            else{
+
+                toggleAudio.className =
+                    "flex-1 py-3 rounded-xl text-xs font-bold bg-white text-blue-600 transition";
+
+                toggleImage.className =
+                    "flex-1 py-3 rounded-xl text-xs font-bold text-slate-400 transition";
+
+                icon.innerText = "🎵";
+
+                prompt.innerText = "Upload Audio to Analyze";
+
+                fileInput.accept = "audio/*";
+            }
+        }
+
+        toggleAudio.onclick = () => setMode('audio');
+
+        toggleImage.onclick = () => setMode('image');
+
+        dropzone.onclick = () => fileInput.click();
+
+        fileInput.onchange = () => {
+
+            if(fileInput.files[0]){
+
+                prompt.innerText = fileInput.files[0].name;
+
+                prompt.classList.add('text-blue-400');
+            }
+        };
+
+        runBtn.onclick = async () => {
+
+            if(!fileInput.files[0]){
+
+                alert("Please upload a file first.");
+
+                return;
+            }
+
+            runBtn.innerText = "Scanning...";
+            runBtn.disabled = true;
+
+            const formData = new FormData();
+
+            formData.append('file', fileInput.files[0]);
+            formData.append('mode', currentMode);
+
+            try{
+
+                const response = await fetch('/analyze', {
+                    method:'POST',
+                    body:formData
+                });
+
+                const data = await response.json();
+
+                result.classList.remove('hidden');
+
+                if(data.error){
+
+                    document.getElementById('resStatus').innerText = "ERROR";
+                    document.getElementById('resConf').innerText = data.error;
+
+                    document.getElementById('resStatus').style.color = "#f59e0b";
+
+                }else{
+
+                    document.getElementById('resStatus').innerText =
+                        data.status || "Unknown";
+
+                    document.getElementById('resConf').innerText =
+                        data.confidence || "--";
+
+                    document.getElementById('resStatus').style.color =
+                        data.status === "Deepfake"
+                        ? "#ef4444"
+                        : "#22c55e";
+                }
+
+            }catch(error){
+
+                console.error(error);
+
+                alert("Server Connection Error.");
+
+            }finally{
+
+                runBtn.innerText = "Run Forensic Scan";
+                runBtn.disabled = false;
+            }
+        };
+
+        /* DRAG DROP */
+
+        dropzone.ondragover = (e) => {
+
+            e.preventDefault();
+
+            dropzone.classList.add(
+                'border-blue-500',
+                'bg-blue-500/10'
+            );
+        };
+
+        dropzone.ondragleave = () => {
+
+            dropzone.classList.remove(
+                'border-blue-500',
+                'bg-blue-500/10'
+            );
+        };
+
+        dropzone.ondrop = (e) => {
+
+            e.preventDefault();
+
+            dropzone.classList.remove(
+                'border-blue-500',
+                'bg-blue-500/10'
+            );
+
+            fileInput.files = e.dataTransfer.files;
+
+            if(fileInput.files[0]){
+
+                prompt.innerText = fileInput.files[0].name;
+            }
+        };
+
+    </script>
+
+</body>
+</html>

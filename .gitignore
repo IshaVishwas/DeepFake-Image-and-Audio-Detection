@@ -1,0 +1,5 @@
+models/*.pt
+models/*.pth
+uploads/
+__pycache__/
+*.pyc
