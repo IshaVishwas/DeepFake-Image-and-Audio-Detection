@@ -2,6 +2,10 @@
 
 An AI-powered multimodal deepfake detection system that identifies manipulated images and audio using deep learning techniques.
 
+## Live Demo
+
+https://phase-durable-letter-prostate.trycloudflare.com/
+
 ## Features
 
 - Detects deepfake images
