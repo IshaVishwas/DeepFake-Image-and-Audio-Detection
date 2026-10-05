@@ -41,7 +41,7 @@ https://phase-durable-letter-prostate.trycloudflare.com/
 git clone https://github.com/IshaVishwas/DeepFake-Image-and-Audio-Detection.git
 cd DeepFake-Image-and-Audio-Detection
 pip install -r requirements.txt
-python app.py
+python run.py
 ```
 
 ## Future Improvements
