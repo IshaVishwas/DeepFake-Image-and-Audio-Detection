@@ -2,10 +2,6 @@
 
 An AI-powered multimodal deepfake detection system that identifies manipulated images and audio using deep learning techniques.
 
-## Live Demo
-
-https://phase-durable-letter-prostate.trycloudflare.com/
-
 ## Features
 
 - Detects deepfake images
@@ -41,7 +37,7 @@ https://phase-durable-letter-prostate.trycloudflare.com/
 git clone https://github.com/IshaVishwas/DeepFake-Image-and-Audio-Detection.git
 cd DeepFake-Image-and-Audio-Detection
 pip install -r requirements.txt
-python run.py
+python app.py
 ```
 
 ## Future Improvements
